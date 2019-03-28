@@ -21,3 +21,8 @@ Route::prefix('auth')->group(function () {
     Route::post('register', 'API\AuthController@register');
     Route::post('login', 'API\AuthController@authenticate');
 });
+
+Route::prefix('advertisement')->group(function () {
+    Route::post('store', 'API\PropertyAdvertisementController@store');
+    Route::post('upload-image', 'API\PropertyAdvertisementController@UploadAdvertImage');
+});

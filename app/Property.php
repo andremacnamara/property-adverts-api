@@ -3,7 +3,9 @@
 namespace App;
 
 use App\Photo;
+use App\PropertyPayments;
 use App\User;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
@@ -18,6 +20,11 @@ class Property extends Model
     public function photo()
     {
         return $this->hasMany(Photo::class);
+    }
+
+    public function payment()
+    {
+        return $this->hasOne(PropertyPayments::class);
     }
 
 

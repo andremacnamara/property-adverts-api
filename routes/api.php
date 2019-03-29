@@ -25,4 +25,10 @@ Route::prefix('auth')->group(function () {
 Route::prefix('advertisement')->group(function () {
     Route::post('store', 'API\PropertyController@store');
     Route::post('{property}/upload-image', 'API\PropertyController@UploadAdvertImage');
+    Route::post('{property}/payment', 'API\PropertyController@ProcessAdvertPayment');
+});
+
+Route::get('/properties', function() {
+    $properties = App\Property::all();
+    return response()->json($properties);
 });

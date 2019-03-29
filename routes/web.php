@@ -16,5 +16,3 @@ Route::get('/api/test', function () {
     $data = DB::table('test')->select('name', 'state')->get();
     return response()->json($data);
 });
-
-Route::get('/', 'HomeController@index')->name('home');

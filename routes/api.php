@@ -23,6 +23,6 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::prefix('advertisement')->group(function () {
-    Route::post('store', 'API\PropertyAdvertisementController@store');
-    Route::post('upload-image', 'API\PropertyAdvertisementController@UploadAdvertImage');
+    Route::post('store', 'API\PropertyController@store');
+    Route::post('{property}/upload-image', 'API\PropertyController@UploadAdvertImage');
 });

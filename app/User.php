@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\PropertyAdvertisement;
+use App\Property;
 
 class User extends Authenticatable
 {
@@ -23,8 +23,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function propertyAdvertisement()
+    public function property()
     {
-        return $this->hasMany(PropertyAdvertisement::class);
+        return $this->hasMany(Property::class);
     }
 }

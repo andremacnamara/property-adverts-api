@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePropertyAdvertisementsTable extends Migration
+class CreatePropertiesTable extends Migration
 {
     public function up()
     {
-        Schema::create('property_advertisements', function (Blueprint $table) {
+        Schema::create('properties', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('address');
             $table->string('town');
@@ -30,6 +30,6 @@ class CreatePropertyAdvertisementsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('property_advertisements');
+        Schema::dropIfExists('properties');
     }
 }

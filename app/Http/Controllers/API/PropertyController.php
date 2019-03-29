@@ -43,7 +43,7 @@ class PropertyController extends Controller
         return response()->json($photo);
     }
 
-    public function ProcessAdvertPayment(Property $property, Request $request, PropertyPaymentRequest $request1)
+    public function ProcessAdvertPayment(Property $property, Request $request, PropertyPaymentRequest $propertyPaymentRequest)
     {
 
         $payload = $request->input('payload', false);
@@ -57,8 +57,8 @@ class PropertyController extends Controller
 
         if($payment->success)
         {
-            // $property->payment()->create(['amount' => $payment->transaction->amount, 'braintree_transaction_id' => $payment->transaction->id, 'billing_address' => request('billing_address'), 'town' => request('town'), 'county' => request('county')]);
-            $property->payment()->create($request1->all());
+            $property->payment()->create(['amount' => $payment->transaction->amount, 'braintree_transaction_id' => $payment->transaction->id, 'billing_address' => request('billing_address'), 'town' => request('town'), 'county' => request('county')]);
+            // $property->payment()->create($request1->all());
             return response()->json($payment);
         } 
 

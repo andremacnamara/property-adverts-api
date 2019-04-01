@@ -1,28 +1,65 @@
 <?php
 
+
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
+    /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    }
+
     public function register() 
     {
         $user =  User::create(['username' => request('username'), 'email' => request('email'), 'email_verified_at' => request('email_verified_at'), 'password' => bcrypt(request('password'))]);
         return response()->json($user);
     }
 
-    public function authenticate(Request $request)
+    public function login()
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = request(['email', 'password']);
 
-        if (Auth::attempt($credentials)) {
-            return response()->json(auth()->user());
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Failed'], 401);
         }
 
-        return response()->json(['message' => 'Failed to authenticate'], 401);
+        return $this->respondWithToken($token);
+    }
+
+    public function me()
+    {
+        return response()->json(auth()->user());
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    public function refresh()
+    {
+        return $this->respondWithToken(auth()->refresh());
+    }
+
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => auth()->user()
+        ]);
     }
 }

@@ -23,9 +23,8 @@ use JD\Cloudder\Facades\Cloudder;
 
 class PropertyController extends Controller
 {
-    public function store(PropertyRequest $request) 
+    public function store(User $user, PropertyRequest $request) 
     {
-        $user = User::find($request['property']['user_id']);
         $advert = $user->property()->create($request['property']);
         return response()->json($advert);
     }

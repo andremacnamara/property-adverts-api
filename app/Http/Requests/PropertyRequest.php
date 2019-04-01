@@ -14,19 +14,19 @@ class PropertyRequest extends FormRequest
     public function rules()
     {
         return [
-            'address' => 'required',
-            'bathrooms' => 'required',
-            'bedrooms' => 'required',
-            'building_energy_rating' => 'required',
-            'county' => 'required',
-            'description' => 'required',
-            'eircode' => 'required',
-            'postcode' => 'required',
-            'price' => 'required',
-            'property_type' => 'required',
-            'selling_type' => 'required',
-            'size' => 'required',
-            'town' => 'required',
+            'address' => 'sometimes',
+            'bathrooms' => 'sometimes',
+            'bedrooms' => 'sometimes',
+            'building_energy_rating' => 'sometimes',
+            'county' => 'sometimes',
+            'description' => 'sometimes',
+            'eircode' => 'sometimes',
+            'postcode' => 'sometimes',
+            'price' => 'sometimes',
+            'property_type' => 'sometimes',
+            'selling_type' => 'sometimes',
+            'size' => 'sometimes',
+            'town' => 'sometimes',
         ];
     }
 }

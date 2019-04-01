@@ -25,9 +25,8 @@ class PropertyController extends Controller
 {
     public function store(PropertyRequest $request) 
     {
-        $user = User::find(1);
-        // $user = Auth::user();
-        $advert = $user->property()->create($request->all());
+        $user = User::find($request['property']['user_id']);
+        $advert = $user->property()->create($request['property']);
         return response()->json($advert);
     }
 

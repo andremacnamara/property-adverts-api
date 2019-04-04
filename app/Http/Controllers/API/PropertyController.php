@@ -43,20 +43,19 @@ class PropertyController extends Controller
 
     public function ProcessAdvertPayment(Property $property, Request $request, PropertyPaymentRequest $propertyPaymentRequest)
     {
-
+        
         $payload = $request->input('payload', false);
         $nonce = $payload['nonce'];
 
         $payment = Braintree_Transaction::sale([
             'amount' => 1,
             'paymentMethodNonce' => $nonce,
-            'creditCard' => ['number' => request('cardnumber'), 'expirationDate' => request('month') . '/' . request('year'), "cvv" => request('cvv')],
+            'creditCard' => ['number' => request('payment')['cardnumber'], 'expirationDate' => request('payment')['month'] . '/' . request('payment')['year'], "cvv" => request('payment')['cvv']],
         ]);
 
         if($payment->success)
         {
-            $property->payment()->create(['amount' => $payment->transaction->amount, 'braintree_transaction_id' => $payment->transaction->id, 'billing_address' => request('billing_address'), 'town' => request('town'), 'county' => request('county')]);
-            // $property->payment()->create($request1->all());
+            $property->payment()->create(['amount' => $payment->transaction->amount, 'braintree_transaction_id' => $payment->transaction->id, 'billing_address' => request('payment')['billing_address'], 'town' => request('payment')['town'], 'county' => request('payment')['county']]);
             return response()->json($payment);
         } 
 

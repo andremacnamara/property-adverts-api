@@ -15,9 +15,9 @@ class PropertyPaymentRequest extends FormRequest
     public function rules()
     {
         return [
-            'billing_address' => 'required',
-            'town' => 'required',
-            'county' => 'required',
+            'payment.billing_address' => 'required',
+            'payment.town' => 'required',
+            'payment.county' => 'required',
         ];
     }
 }

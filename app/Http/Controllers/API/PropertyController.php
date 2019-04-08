@@ -15,7 +15,7 @@ class PropertyController extends Controller
 
     public function all(User $user)
     {
-        $properties = $user->properties()->get();
+        $properties = $user->properties()->with('photos')->get();
 
         if (!$user)
         {

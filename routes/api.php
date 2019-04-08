@@ -13,10 +13,17 @@ Route::prefix('auth')->group(function (){
     });
 });
 
-Route::prefix('advertisement')->group(function () {
-    Route::post('{user}/store', 'API\PropertyController@store');
-    Route::post('{property}/upload-image', 'API\PropertyController@UploadAdvertImage');
-    Route::post('{property}/payment', 'API\PropertyController@ProcessAdvertPayment');
+Route::prefix('property')->group(function () {
+    Route::post('{user}/store', 'API\PropertyAdvertController@store');
+    Route::post('{property}/upload-image', 'API\PropertyAdvertController@UploadAdvertImage');
+    Route::post('{property}/payment', 'API\PropertyAdvertController@ProcessAdvertPayment');
+
+    Route::get('{property}/show', 'API\PropertyController@show');
+    Route::get('{user}/all', 'API\PropertyController@all');
+    Route::get('{property}/edit', 'API\PropertyController@edit');
+    Route::put('{property}/update', 'API\PropertyController@update');
+
+
 });
 
-Route::get('home', function() {return 'home';})->name('home');
+// Route::get('home', function() {return 'home';})->name('home');

@@ -25,7 +25,7 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-    public function property()
+    public function properties()
     {
         return $this->hasMany(Property::class);
     }

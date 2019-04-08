@@ -32,6 +32,8 @@ class PropertyController extends Controller
 
     public function show(Property $property)
     {
+       $property->load('photos');
+
         if (!$property)
         {
             return response()->json(['error' => 'Property not found'], 404);

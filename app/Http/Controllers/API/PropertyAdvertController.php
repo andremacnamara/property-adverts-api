@@ -7,6 +7,8 @@ use App\Photo;
 use App\Property;
 use App\User;
 
+use App\Mail\SellerContactMail;
+
 use App\Http\Requests\PhotoRequest;
 use App\Http\Requests\PropertyRequest;
 use App\Http\Requests\PropertyPaymentRequest;
@@ -23,7 +25,7 @@ class PropertyAdvertController extends Controller
 {
     public function store(User $user, PropertyRequest $request) 
     {
-        $advert = $user->property()->create($request['property']);
+        $advert = $user->properties()->create($request['property']);
         return response()->json($advert);
     }
 
@@ -34,7 +36,7 @@ class PropertyAdvertController extends Controller
 
         $result = Cloudder::getResult();
 
-        $photo = $property->photo()->create(['url' => $result['url'], 'public_id' => $result['public_id']]);
+        $photo = $property->photos()->create(['url' => $result['url'], 'public_id' => $result['public_id']]);
 
         return response()->json($photo);
     }
@@ -58,5 +60,10 @@ class PropertyAdvertController extends Controller
         } 
 
         return response()->json(['error' => 'Payment Failed. Please try again or contact your payment provider for further help.'], 400);
+    }
+
+    public function mail(User $user)
+    {
+        \Mail::to($user)->send(new SellerContactMail);
     }
 }

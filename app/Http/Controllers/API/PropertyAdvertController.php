@@ -12,6 +12,9 @@ use App\Mail\SellerContactMail;
 use App\Http\Requests\PhotoRequest;
 use App\Http\Requests\PropertyRequest;
 use App\Http\Requests\PropertyPaymentRequest;
+use App\Http\Requests\SellerContactRequest;
+use App\Http\Requests\PropertyEnquiryRequest;
+
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -60,10 +63,10 @@ class PropertyAdvertController extends Controller
         } 
 
         return response()->json(['error' => 'Payment Failed. Please try again or contact your payment provider for further help.'], 400);
-    }
+    } 
 
-    public function mail(User $user)
-    {
-        \Mail::to($user)->send(new SellerContactMail);
+    public function mail(User $user, Request $msg)
+    {        
+        \Mail::to($user)->send(new SellerContactMail($user, $msg));
     }
 }

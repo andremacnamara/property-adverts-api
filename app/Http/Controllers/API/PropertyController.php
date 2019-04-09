@@ -32,7 +32,7 @@ class PropertyController extends Controller
 
     public function show(Property $property)
     {
-       $property->load('photos');
+       $property->load('photos', 'user');
 
         if (!$property)
         {

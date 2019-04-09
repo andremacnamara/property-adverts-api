@@ -2,6 +2,11 @@
 
 namespace App\Mail;
 
+use App\User;
+// use App\Http\Requests\SellerContactRequest;
+
+use Illuminate\Http\Request;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -11,14 +16,12 @@ class SellerContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $user, $msg;
+
+    public function __construct(User $user, $msg)
     {
-        //
+        $this->user = $user;
+        $this->msg = $msg;
     }
 
     /**

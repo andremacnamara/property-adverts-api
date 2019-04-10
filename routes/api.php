@@ -22,8 +22,9 @@ Route::prefix('property')->group(function () {
     Route::get('{user}/all', 'API\PropertyController@all');
     Route::get('{property}/edit', 'API\PropertyController@edit');
     Route::put('{property}/update', 'API\PropertyController@update');
-
-
 });
+
+Route::post('/search', 'API\PropertySearchController@filter');
+
 
 // Route::get('home', function() {return 'home';})->name('home');

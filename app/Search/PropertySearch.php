@@ -63,6 +63,6 @@ class PropertySearch
             $property->where('size',  '<=', $filters->input('max_size'));
         }
 
-        return $filters->all();
+        return $property->with('photos')->get();
     }
 }

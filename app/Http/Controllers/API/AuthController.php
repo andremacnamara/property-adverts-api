@@ -4,7 +4,8 @@
 namespace App\Http\Controllers\API;
 
 use App\User;
-use Illuminate\Support\Facades\Auth;
+
+use App\Http\Requests\CreateUserRequest;
 use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
@@ -19,9 +20,9 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
-    public function register() 
-    {
-        $user =  User::create(['first_name' => request('first_name'), 'last_name' => request('last_name'), 'username' => request('username'), 'email' => request('email'), 'phone_number' => request('phone_number'), 'password' => bcrypt(request('password'))]);
+    public function register(CreateUserRequest $createUser) 
+    {        
+        $user = User::create($createUser->validated());
         return response()->json($user);
     }
 

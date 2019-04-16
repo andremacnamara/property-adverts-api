@@ -17,6 +17,7 @@ Route::prefix('property')->group(function () {
     Route::post('{user}/store', 'API\PropertyAdvertController@store');
     Route::post('{property}/upload-image', 'API\PropertyAdvertController@UploadAdvertImage');
     Route::post('{property}/payment', 'API\PropertyAdvertController@ProcessAdvertPayment');
+    Route::post('{user}/mail', 'API\PropertyAdvertController@mail');
 
     Route::get('{property}/show', 'API\PropertyController@show');
     Route::get('{user}/all', 'API\PropertyController@all');

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Photo;
 use App\PropertyPayments;
+use App\StarredProperty;
 use App\User; 
 
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,11 @@ class Property extends Model
     public function photos()
     {
         return $this->hasOne(Photo::class);
+    }
+
+    public function stars()
+    {
+        return $this->hasMany(StarredProperty::class);
     }
 
     public function getMainPhoto()

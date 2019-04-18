@@ -15,7 +15,7 @@ class PropertyController extends Controller
 
     public function all(User $user)
     {
-        $properties = $user->properties()->with('photos')->get();
+        $properties = $user->properties()->with('photos', 'stars')->get();
 
         if (!$user)
         {
@@ -27,7 +27,7 @@ class PropertyController extends Controller
             return response()->json(['error' => 'No properties'], 200);
         }
 
-        return response()->json($properties);
+        return response()->json($properes);
     }
 
     public function show(Property $property)

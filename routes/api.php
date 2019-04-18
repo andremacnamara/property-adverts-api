@@ -24,7 +24,9 @@ Route::prefix('property')->group(function () {
     Route::get('{property}/edit', 'API\PropertyController@edit');
     Route::put('{property}/update', 'API\PropertyController@update');
 
-    Route::post('star/{property}/{user}', 'API\StarredPropertyController@store');
+    Route::post('star/{property}/{user}', 'API\StarredPropertyController@star');
+    Route::delete('unstar/{property}/{user}', 'API\StarredPropertyController@unstar');
+    Route::get('starredProperties/{user}', 'API\StarredPropertyController@getStarredProperties');
 });
 
 Route::post('/search', 'API\PropertySearchController@filter');

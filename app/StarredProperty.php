@@ -14,6 +14,6 @@ class StarredProperty extends Model
 
     public function scopeStarredProperty($query, $propertyId, $userId)
     {
-        return $query->where('property_id', $propertyId)->where('user_id', $userId)->exists();
+        return $query->where('property_id', $propertyId)->where('user_id', $userId);
     }
 }

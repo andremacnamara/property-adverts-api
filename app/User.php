@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Property;
+use App\StarredProperty;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
@@ -30,10 +31,17 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Property::class);
     }
 
+    public function starredProperties()
+    {
+        return $this->hasMany(StarredProperty::class);
+    }
+
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
     }
+    
 
     public function getJWTCustomClaims()
     {

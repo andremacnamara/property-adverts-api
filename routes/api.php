@@ -23,6 +23,8 @@ Route::prefix('property')->group(function () {
     Route::get('{user}/all', 'API\PropertyController@all');
     Route::get('{property}/edit', 'API\PropertyController@edit');
     Route::put('{property}/update', 'API\PropertyController@update');
+
+    Route::post('star/{property}/{user}', 'API\StarredPropertyController@store');
 });
 
 Route::post('/search', 'API\PropertySearchController@filter');
